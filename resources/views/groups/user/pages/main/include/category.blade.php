@@ -5,9 +5,7 @@
         </h2>
 
 
-        <button id="buttonCategory" class="btn btn-primary">Добавить</button>
-
-        <div class="mt-3 d-none" id="formCategory">
+        <div class="mt-3">
 
             <ul style="list-style: none" class="pl-0">
                 @foreach($categories as $category)
@@ -19,10 +17,18 @@
                                 @foreach($category->child as $child)
                                     <li class="d-flex align-items-center justify-content-between my-1">
                                         {{ $child->name }}
-                                        <form action="{{ route('user.index.addCategory', $child->id) }}" method="POST">
-                                            @csrf
-                                            <button class="btn btn-success">Add</button>
-                                        </form>
+
+                                        @if( $user->categories->pluck('name')->search( $child->name ) !== false )
+                                           <form action="{{ route('user.index.removeCategory', $child->id) }}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-danger">Remove</button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('user.index.addCategory', $child->id) }}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-success">Add</button>
+                                            </form>
+                                        @endif
                                     </li>
                                 @endforeach
                             </ul>

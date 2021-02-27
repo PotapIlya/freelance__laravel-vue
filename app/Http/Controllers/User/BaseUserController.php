@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class BaseUserController extends Controller
 {
+    const DISK = 'public';
 	public function __construct()
 	{
 //		parent::__construct();

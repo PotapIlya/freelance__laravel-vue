@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/message', function (Illuminate\Http\Request $request)
+{
+    \App\Events\User\Chat\MessageEvent::dispatch($request->all());
+
+});
+
 Auth::routes();
 
 /*
@@ -28,8 +34,23 @@ Route::group(
     {
 
         Route::resource('/', 'IndexController')->names('user.index');
+        Route::post('/uploadImage', 'IndexController@uploadImage')->name('user.index.uploadImage');
         Route::post('/update/password/{id}', 'IndexController@updatePassword')->name('user.index.updatePassword');
         Route::post('/add/category/{id}', 'IndexController@addCategory')->name('user.index.addCategory');
+        Route::post('/remove/category/{id}', 'IndexController@removeCategory')->name('user.index.removeCategory');
+
+        Route::get('/user/{name}', 'IndexController@user')->name('user.index.user');
+
+        Route::group([
+            'namespace' => 'Portfolio'
+        ], function ()
+        {
+            Route::resource('/portfolio', 'PortfolioController')->names('user.portfolio');
+            Route::resource('/comment', 'CommentsController')->names('user.comments');
+            Route::post('/comment/store/{portfolio_id}', 'CommentsController@storeComment')->name('user.comments.storeComment');
+        });
+
+
 
         Route::resource('/projects', 'ProjectsController')->names('user.projects');
 
@@ -43,6 +64,18 @@ Route::group(
                 'text' => $redirect->text,
             ]);
             return redirect()->back();
+        });
+
+
+        /**
+         * CHAT
+         */
+        Route::group([
+            'namespace' => 'Chat',
+            'prefix' => 'chat'
+        ], function ()
+        {
+            Route::resource('/', 'IndexController')->names('user.chat');
         });
     }
 );

@@ -9,6 +9,7 @@ use Faker\Provider\Base;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Admin\Users\User;
+use Illuminate\Support\Facades\Storage;
 
 
 class IndexController extends BaseUserController
@@ -26,11 +27,39 @@ class IndexController extends BaseUserController
      */
     public function index()
     {
-        $user = Auth::user();
+        $user = User::with('categories.child')
+            ->with(['portfolio' => function($query)
+            {
+                $query->take(4);
+            }])
+            ->find( Auth::id() );
+
 
         $categories = Category::getAll();
 
         return view('groups.user.pages.main.index', compact('user', 'categories'));
+    }
+
+
+    /**
+     * @param string $name
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|void
+     */
+    public function user(string $name)
+    {
+        $user = User::with('categories')
+            ->where('name', $name)
+            ->first();
+        if ( !$user ){
+            return abort(404);
+        }
+
+
+//        dd($user->categories);
+
+        return view('groups.user.pages.user.index', compact('user'));
+
+
     }
 
     /**
@@ -54,9 +83,33 @@ class IndexController extends BaseUserController
         //
     }
 
+    public function uploadImage(Request $request)
+    {
+
+        $path = Storage::disk(self::DISK)->put(Auth::id(),  $request->image);
+        $update = User::findOrFail(Auth::id())->update([
+            'image' => $path,
+        ]);
+
+        if ( $update )
+        {
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * @param int $id
+     */
     public function addCategory(int $id)
     {
-        dd($id);
+        $create = Auth::user()->categories()->attach( $id );
+        return redirect()->back();
+    }
+
+    public function removeCategory(int $id)
+    {
+        $remove = Auth::user()->categories()->detach( $id );
+        return redirect()->back();
     }
 
     /**

@@ -5,11 +5,11 @@
     <div class="d-flex w-100 justify-content-between">
 
 
-        <div class="">
+        <div class="col-6 pl-0">
            <div>
                <h2>Личные данные</h2>
 
-               @if( Auth::user()->freelancer )
+               @if( $user->freelancer )
                    <h1>
                        Фрилансер
                    </h1>
@@ -20,7 +20,24 @@
                @endif
 
 
-               <form action="" class="d-flex flex-column">
+
+               @if(!is_null($user->image))
+                   <div class="col-6">
+                       <img class="w-100" src="/storage/{{ $user->image }}" alt="">
+                   </div>
+               @else
+                  <div class="col-6">
+                      <img class="w-100" src="/assets/static/images/noImage.jpg" alt="">
+                  </div>
+                   <form action="{{ route('user.index.uploadImage') }}" method="POST" enctype="multipart/form-data">
+                       @csrf
+                       <input type="file" name="image">
+                       <button class="btn btn-info w-100">Upload</button>
+                   </form>
+               @endif
+
+
+               <form action="" class="d-flex flex-column mt-3">
 
                    <label for="" class="d-flex align-items-center justify-content-between">
                        <span>Name</span>
@@ -41,7 +58,7 @@
 
         </div>
 
-        <div>
+        <div class="col-6 pr-0">
             <h2>
                 Сменить пароль
             </h2>
@@ -69,6 +86,8 @@
 
             </form>
 
+            @includeWhen(count($user->portfolio), 'groups.user.pages.main.include.portfolio')
+
         </div>
 
 
@@ -77,16 +96,16 @@
 @endsection
 
 @section('footer')
-    <script>
-       setTimeout(() => {
-           const wrapper = document.querySelector('#category');
-           const btn = wrapper.querySelector('#buttonCategory');
-           const form = wrapper.querySelector('#formCategory');
+{{--    <script>--}}
+{{--       setTimeout(() => {--}}
+{{--           const wrapper = document.querySelector('#category');--}}
+{{--           const btn = wrapper.querySelector('#buttonCategory');--}}
+{{--           const form = wrapper.querySelector('#formCategory');--}}
 
-           btn.addEventListener('click', () =>
-           {
-               form.classList.remove('d-none')
-           })
-       }, 100)
-    </script>
+{{--           btn.addEventListener('click', () =>--}}
+{{--           {--}}
+{{--               form.classList.remove('d-none')--}}
+{{--           })--}}
+{{--       }, 100)--}}
+{{--    </script>--}}
 @endsection

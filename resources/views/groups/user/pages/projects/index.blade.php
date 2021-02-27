@@ -5,11 +5,7 @@
 
     <div class="col">
 
-
-        @if(count($myProject))
-            @dd($myProject)
-
-        @endif
+        @includeWhen( count($myProject), 'groups.user.pages.projects.include.listMyProject')
 
 
         @includeWhen(!Auth::user()->freelancer, 'groups.user.pages.projects.include.createProject')
@@ -18,6 +14,9 @@
         @if( count($projects) )
 
             <table class="table">
+                <h2>
+                    Все проекты
+                </h2>
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -50,4 +49,30 @@
 
 
         </div>
+@endsection
+
+
+@section('footer')
+
+
+    <script>
+        setTimeout(() =>
+        {
+            if ( document.querySelector('#createProject') )
+            {
+                const title = document.querySelector('#inputTitle');
+                const url = document.querySelector('#inputUrl');
+
+                title.addEventListener('input', () =>
+                {
+                    // console.log(
+                    //     title.value.split(' ').join('_')
+                    // )
+
+                    url.value = title.value.toLowerCase().split(' ').join('_');
+                })
+            }
+        }, 100)
+    </script>
+
 @endsection

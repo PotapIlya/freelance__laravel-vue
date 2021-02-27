@@ -2,7 +2,9 @@
 
 namespace App\Models\Admin\Users;
 
+use App\Models\Admin\Project\Category;
 use App\Models\Admin\Users\Role;
+use App\Models\User\Portfolio\UserPortfolio;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,16 +47,34 @@ class User extends Authenticatable
     ];
 
 
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function role()
 	{
 		return $this->hasOne(Role::class, 'id', 'role_id');
 	}
 
+    /**
+     * @return bool
+     */
 	public function isAdmin()
 	{
 		return $this->role()->where('name', 'admin')->exists();
 	}
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+	public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'user_category', 'user_id', 'category_id');
+    }
+
+    public function portfolio()
+    {
+        return $this->hasMany(UserPortfolio::class, 'user_id', 'id');
+    }
 
 
 }
