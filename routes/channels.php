@@ -16,3 +16,22 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+Broadcast::channel('presence-room.{id}', function ($user, $id)
+{
+    return true;
+});
+
+
+
+
+//Broadcast::channel('NewMessage_room.{id}', function ($user, $id)
+//{
+//    return true;
+////    if ($user->rooms->contains($id))
+////    {
+////        return $user->name;
+////    }
+//
+////    return (int) $user->id === (int) $id;
+//});

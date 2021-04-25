@@ -28,11 +28,6 @@
                    <div class="col-6">
                        <img class="w-100" src="/assets/static/images/noImage.jpg" alt="">
                    </div>
-                   <form action="{{ route('user.index.uploadImage') }}" method="POST" enctype="multipart/form-data">
-                       @csrf
-                       <input type="file" name="image">
-                       <button class="btn btn-info w-100">Upload</button>
-                   </form>
                @endif
 
 
@@ -54,6 +49,7 @@
 
             @includeWhen(count($user->categories), 'groups.user.pages.user.include.category')
 
+            @includeWhen(count($user->portfolio), 'groups.user.pages.user.include.portfolio')
 
         </div>
 

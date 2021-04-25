@@ -67,8 +67,8 @@ Route::group(
         });
 
 
-        /**
-         * CHAT
+        /*
+         *  CHAT
          */
         Route::group([
             'namespace' => 'Chat',

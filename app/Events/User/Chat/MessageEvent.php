@@ -12,14 +12,18 @@ use Illuminate\Queue\SerializesModels;
 
 class MessageEvent implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
+    /**
+     * @var
+     */
     public $message;
 
     /**
-     * Create a new event instance.
-     *
-     * @return void
+     * MessageEvent constructor.
+     * @param $data
      */
     public function __construct($data)
     {
@@ -27,14 +31,16 @@ class MessageEvent implements ShouldBroadcast
     }
 
     /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return PresenceChannel
      */
     public function broadcastOn()
     {
-        return new Channel('test');
+        return new PresenceChannel('room.'.$this->message['id']);
     }
+
+    /**
+     * @return string
+     */
     public function broadcastAs()
     {
         return 'NewMessage';

@@ -1948,19 +1948,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ChatComponent",
-  props: ['chat'],
   data: function data() {
     return {
       arrayMessage: [],
-      input: null,
+      input: '',
       url: '/message'
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    // this.arrayMessage = this.chat
-    window.Echo.channel('test').listen('NewMessage', function (_ref) {
+    window.Echo.channel('presence-room.' + 1).listen('NewMessage', function (_ref) {
       var message = _ref.message;
       console.log(message);
 
@@ -1974,13 +1972,14 @@ __webpack_require__.r(__webpack_exports__);
     save: function save() {
       var _this2 = this;
 
-      if (this.input !== '' && this.input !== null) {
+      if (this.input !== '') {
         axios__WEBPACK_IMPORTED_MODULE_0___default().post(this.url, {
           data: this.input,
-          id: 2
+          id: 1
         }).then(function (response) {
+          // console.log(response)
           if (response) {
-            _this2.input = null;
+            _this2.input = '';
           }
         });
       }
@@ -48151,7 +48150,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "d-flex flex-column" }, [
+  return _c("div", { attrs: { className: "d-flex flex-column" } }, [
     _c(
       "form",
       {
@@ -48173,7 +48172,7 @@ var render = function() {
               expression: "input"
             }
           ],
-          staticClass: "w-75",
+          attrs: { className: "w-75" },
           domProps: { value: _vm.input },
           on: {
             input: function($event) {
@@ -48187,7 +48186,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "w-25 btn btn-success", attrs: { type: "submit" } },
+          { attrs: { type: "submit", className: "w-25 btn btn-success" } },
           [_vm._v("Save")]
         )
       ]
@@ -48196,10 +48195,10 @@ var render = function() {
     _vm.arrayMessage.length
       ? _c(
           "ul",
-          { staticClass: "my-3 list-inline" },
+          { attrs: { className: "my-3 list-inline" } },
           _vm._l(_vm.arrayMessage, function(item) {
             return _c("li", [
-              _c("span", { staticClass: "d-block h4" }, [
+              _c("span", { attrs: { className: "d-block h4" } }, [
                 _vm._v(_vm._s(item.message))
               ]),
               _vm._v(" "),

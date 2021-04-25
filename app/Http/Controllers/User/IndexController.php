@@ -47,11 +47,11 @@ class IndexController extends BaseUserController
      */
     public function user(string $name)
     {
-        $user = User::with('categories')
+        $user = User::with('categories', 'portfolio')
             ->where('name', $name)
             ->first();
         if ( !$user ){
-            return abort(404);
+            abort(404);
         }
 
 
