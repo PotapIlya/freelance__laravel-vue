@@ -29,7 +29,7 @@
                   <div class="col-6">
                       <img class="w-100" src="/assets/static/images/noImage.jpg" alt="">
                   </div>
-                   <form action="{{ route('user.index.uploadImage') }}" method="POST" enctype="multipart/form-data">
+                   <form action="{{ route('user.index.upload.image') }}" method="POST" enctype="multipart/form-data">
                        @csrf
                        <input type="file" name="image">
                        <button class="btn btn-info w-100">Upload</button>
@@ -53,7 +53,7 @@
                </form>
            </div>
 
-            @includeWhen(count($categories), 'groups.user.pages.main.include.category')
+            @includeWhen(count($categories), 'groups.user.pages.index.include.category')
 
 
         </div>
@@ -64,7 +64,7 @@
             </h2>
 
 
-            <form method="POST" action="{{ route('user.index.updatePassword', $user->id) }}" class="d-flex flex-column">
+            <form method="POST" action="{{ route('user.index.update.password') }}" class="d-flex flex-column">
                 @csrf
                 <label for="" class="d-flex align-items-center justify-content-between">
                     <span class="mr-4">Старый пароль</span>
@@ -86,7 +86,7 @@
 
             </form>
 
-            @includeWhen(count($user->portfolio), 'groups.user.pages.main.include.portfolio')
+            @includeWhen(count($user->portfolio), 'groups.user.pages.index.include.portfolio')
 
         </div>
 

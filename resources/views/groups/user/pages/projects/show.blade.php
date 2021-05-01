@@ -44,7 +44,7 @@
                 @foreach($project->responses as $response)
                     <tr>
                         <td>
-                            <a href="{{ route('user.index.user', $response->user->name) }}">
+                            <a href="{{ route('user.index.show', $response->user->name) }}">
                                 {{ $response->user->name }}
                             </a>
                         </td>

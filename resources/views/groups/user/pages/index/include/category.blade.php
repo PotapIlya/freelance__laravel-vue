@@ -19,12 +19,12 @@
                                         {{ $child->name }}
 
                                         @if( $user->categories->pluck('name')->search( $child->name ) !== false )
-                                           <form action="{{ route('user.index.removeCategory', $child->id) }}" method="POST">
+                                           <form action="{{ route('user.index.category.destroy', $child->id) }}" method="POST">
                                                 @csrf
                                                 <button class="btn btn-danger">Remove</button>
                                             </form>
                                         @else
-                                            <form action="{{ route('user.index.addCategory', $child->id) }}" method="POST">
+                                            <form action="{{ route('user.index.category.store', $child->id) }}" method="POST">
                                                 @csrf
                                                 <button class="btn btn-success">Add</button>
                                             </form>

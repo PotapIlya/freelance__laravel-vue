@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\BaseUserController;
 use App\Models\Admin\Users\User;
 use App\Models\User\Portfolio\UserPortfolio;
+use App\Services\User\Portfolio\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Auth;
 
 class PortfolioController extends BaseUserController
 {
@@ -25,7 +26,7 @@ class PortfolioController extends BaseUserController
      */
     public function index()
     {
-        $user =  User::with('portfolio')->find(Auth::id());
+        $user =  User::with('portfolio')->findOrFail(Auth::id());
         return view('groups.user.pages.portfolio.index', compact('user'));
     }
 
@@ -39,35 +40,30 @@ class PortfolioController extends BaseUserController
         //
     }
 
+
     /**
      * @param Request $request
+     * @param Image $image
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, Image $image)
     {
-        $path = Storage::disk(self::DISK)->put(Auth::id(),  $request->file('image'));;
-        $create = UserPortfolio::create([
-            'user_id' => Auth::id(),
-            'path' => $path,
-        ]);
-
-        if ( $create )
+        if ( $image->add($request->all()) )
         {
             return redirect()->back();
+        } else{
+            abort(500);
         }
     }
 
+
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(int $id)
     {
         $item = UserPortfolio::with('user', 'comments.user')->findOrFail($id);
-
-
 
         return view('groups.user.pages.portfolio.show', compact('item', 'id'));
     }
@@ -97,20 +93,17 @@ class PortfolioController extends BaseUserController
 
 
     /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse|void
+     * @param int $id
+     * @param Image $image
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(int $id, Image $image)
     {
-        $item = UserPortfolio::findOrFail($id);
-        if ($item->user_id === Auth::id())
+        if ( $image->delete($id) )
         {
-            if ($item->delete() && Storage::disk(self::DISK)->delete($item->path))
-            {
-                return redirect()->back();
-            }
+            return redirect()->back();
         } else{
-             abort(500);
+            abort(500);
         }
     }
 }

@@ -75,7 +75,7 @@
 
                 @if( $item->user_id !== Auth::id() )
 
-                    <form action="{{ route('user.comments.storeComment', $item->id) }}" method="POST">
+                    <form action="{{ route('user.portfolio.comments.store', $item->id) }}" method="POST">
                         @csrf
                         <textarea name="text" class="w-100 h-50" style="resize: none"></textarea>
                         <button class="btn btn-info">Send</button>

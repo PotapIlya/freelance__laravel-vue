@@ -22,6 +22,14 @@ Route::post('/message', function (Illuminate\Http\Request $request)
 Auth::routes();
 
 /*
+ * All
+ */
+Route::get('/', function ()
+{
+    return view('groups.all.welcome');
+});
+
+/*
  * USER
  */
 Route::group(
@@ -33,21 +41,31 @@ Route::group(
     function ()
     {
 
-        Route::resource('/', 'IndexController')->names('user.index');
-        Route::post('/uploadImage', 'IndexController@uploadImage')->name('user.index.uploadImage');
-        Route::post('/update/password/{id}', 'IndexController@updatePassword')->name('user.index.updatePassword');
-        Route::post('/add/category/{id}', 'IndexController@addCategory')->name('user.index.addCategory');
-        Route::post('/remove/category/{id}', 'IndexController@removeCategory')->name('user.index.removeCategory');
+        Route::group([
+            'namespace' => 'Index'
+        ], function ()
+        {
+            Route::resource('/user', 'IndexController')->names('user.index');
 
-        Route::get('/user/{name}', 'IndexController@user')->name('user.index.user');
+            // Category
+            Route::post('/add/category/{id}', 'CategoryController@store')->name('user.index.category.store');
+            Route::post('/remove/category/{id}', 'CategoryController@destroy')->name('user.index.category.destroy');
+
+            // Options
+            Route::post('/uploadImage', 'OptionsController@uploadImage')->name('user.index.upload.image');
+            Route::post('/update/password', 'OptionsController@updatePassword')->name('user.index.update.password');
+        });
+
+
+
 
         Route::group([
             'namespace' => 'Portfolio'
         ], function ()
         {
             Route::resource('/portfolio', 'PortfolioController')->names('user.portfolio');
-            Route::resource('/comment', 'CommentsController')->names('user.comments');
-            Route::post('/comment/store/{portfolio_id}', 'CommentsController@storeComment')->name('user.comments.storeComment');
+//            Route::resource('/comment', 'CommentsController')->names('user.comments');
+            Route::post('/portfolio/comment/store/{portfolio_id}', 'CommentsController@store')->name('user.portfolio.comments.store');
         });
 
 
@@ -56,27 +74,27 @@ Route::group(
 
 
 
-        Route::post('/project/create/{id}', function (\Illuminate\Http\Request $redirect, $id)
-        {
-            \App\Models\Admin\Projects\Response::create([
-                'project_id' => (int) $id,
-                'user_id' => Auth::id(),
-                'text' => $redirect->text,
-            ]);
-            return redirect()->back();
-        });
+//        Route::post('/project/create/{id}', function (\Illuminate\Http\Request $redirect, $id)
+//        {
+//            \App\Models\Admin\Projects\Response::create([
+//                'project_id' => (int) $id,
+//                'user_id' => Auth::id(),
+//                'text' => $redirect->text,
+//            ]);
+//            return redirect()->back();
+//        });
 
 
         /*
          *  CHAT
          */
-        Route::group([
-            'namespace' => 'Chat',
-            'prefix' => 'chat'
-        ], function ()
-        {
-            Route::resource('/', 'IndexController')->names('user.chat');
-        });
+//        Route::group([
+//            'namespace' => 'Chat',
+//            'prefix' => 'chat'
+//        ], function ()
+//        {
+//            Route::resource('/', 'IndexController')->names('user.chat');
+//        });
     }
 );
 
