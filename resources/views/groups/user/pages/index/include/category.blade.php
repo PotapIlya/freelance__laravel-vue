@@ -1,45 +1,19 @@
-@if(count($categories))
-    <div id="category">
-        <h2>
-            Категории
-        </h2>
 
+<div class="skill">
+        @foreach($categories as $category)
+            <h3>
+                {{ $category->name }}
+            </h3>
 
-        <div class="mt-3">
+            <div class="skill-content">
+                @if(count($category->child))
 
-            <ul style="list-style: none" class="pl-0">
-                @foreach($categories as $category)
-                    <li>
-                        {{ $category->name }}
+                    @foreach($category->child as $child)
+                        <span class="big-circle">{{ $child->name }}<span class="small-circle bg-white">45</span></span>
+                    @endforeach
 
-                        @if(count($category->child))
-                            <ul>
-                                @foreach($category->child as $child)
-                                    <li class="d-flex align-items-center justify-content-between my-1">
-                                        {{ $child->name }}
+                @endif
 
-                                        @if( $user->categories->pluck('name')->search( $child->name ) !== false )
-                                           <form action="{{ route('user.index.category.destroy', $child->id) }}" method="POST">
-                                                @csrf
-                                                <button class="btn btn-danger">Remove</button>
-                                            </form>
-                                        @else
-                                            <form action="{{ route('user.index.category.store', $child->id) }}" method="POST">
-                                                @csrf
-                                                <button class="btn btn-success">Add</button>
-                                            </form>
-                                        @endif
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </li>
-                @endforeach
-            </ul>
-
-        </div>
-
-    </div>
-@else
-    <h2>Нету категорий в базе</h2>
-@endif
+            </div>
+        @endforeach
+</div>

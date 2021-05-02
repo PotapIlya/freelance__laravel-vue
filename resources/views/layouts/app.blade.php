@@ -8,8 +8,8 @@
     <title>Document</title>
 
 
-    <link href="{{ asset('/assets/css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/all/css/bootstrap.css') }}" rel="stylesheet">
+{{--    <link href="{{ asset('/assets/css/app.css') }}" rel="stylesheet">--}}
 
 </head>
 <body>

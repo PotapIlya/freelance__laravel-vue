@@ -47,16 +47,24 @@ Route::group(
         {
             Route::resource('/user', 'IndexController')->names('user.index');
 
-            // Category
-            Route::post('/add/category/{id}', 'CategoryController@store')->name('user.index.category.store');
-            Route::post('/remove/category/{id}', 'CategoryController@destroy')->name('user.index.category.destroy');
-
             // Options
             Route::post('/uploadImage', 'OptionsController@uploadImage')->name('user.index.upload.image');
             Route::post('/update/password', 'OptionsController@updatePassword')->name('user.index.update.password');
         });
 
 
+        Route::group([
+            'namespace' => 'Settings'
+            ],
+            function ()
+            {
+            Route::resource('/settings', 'SettingsController')->names('user.settings');
+
+            // Category
+            Route::post('/add/category', 'CategoryController@store')->name('user.settings.category.store');
+            Route::post('/remove/category/{id}', 'CategoryController@destroy')->name('user.settings.category.destroy');
+
+            });
 
 
         Route::group([

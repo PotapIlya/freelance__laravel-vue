@@ -1,0 +1,14 @@
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+
+@import "static/font-awesome.min";
+
+
+@import "theme/aside";
+@import "theme/style-304";
+@import "theme/settings";
+@import "theme/settingsCategory";

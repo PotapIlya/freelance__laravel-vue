@@ -10,8 +10,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
 
-    <link href="{{ asset('/assets/css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/all/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets//user/css/app.css') }}" rel="stylesheet">
 
     @yield('header')
 </head>
@@ -33,7 +33,39 @@
         </main>
         <footer> </footer>
 
-    <script src="{{ asset('/assets/js/app.js') }}" defer></script>
+{{--    <script src="{{ asset('/assets/js/app.js') }}" defer></script>--}}
     @yield('footer')
+
+
+    <script>
+        // on-off aside
+
+        setTimeout(() => {
+            if (document.querySelector('.aside'))
+            {
+                const aside = document.querySelector('#aside');
+                const btn = document.querySelector('#bar');
+
+                btn.addEventListener('click', (e) =>
+                {
+                    e.preventDefault();
+                    aside.classList.toggle('active');
+                })
+
+                const buttons = aside.querySelectorAll('.ui-nav-href');
+                const contents = aside.querySelectorAll('.tab-pane')
+                buttons.forEach( (btn,index) => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+
+                        contents.forEach(x => x.classList.remove('active'))
+                        contents[index].classList.add('active')
+                    })
+                })
+            }
+        }, 500)
+
+    </script>
+
 </body>
 </html>

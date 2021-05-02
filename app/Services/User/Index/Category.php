@@ -11,9 +11,14 @@ class Category
      * @param int $id
      * @return mixed
      */
-    public function add(int $id)
+    public function add(array $array)
     {
-        return Auth::user()->categories()->attach( $id );
+//        dd(
+////
+//
+////
+//        );
+        return Auth::user()->categories()->attach( json_decode($array['params'], true) );
     }
 
     /**

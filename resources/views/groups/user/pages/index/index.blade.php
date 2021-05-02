@@ -2,110 +2,164 @@
 
 
 @section('content')
-    <div class="d-flex w-100 justify-content-between">
 
 
-        <div class="col-6 pl-0">
-           <div>
-               <h2>Личные данные</h2>
+<div class="resume">
+    <!-- Sidebar -->
+    <div class="r-sidebar">
+        <div class="r-sidebar-item">
+            <!-- Sidebar Image -->
+            <div class="img">
+               <img src="/assets/user/static/images/noImage.jpg" alt="" class="img-responsive w-100" />
+            </div>
+            <!-- Name -->
+            <div class="name">
 
-               @if( $user->freelancer )
-                   <h1>
-                       Фрилансер
-                   </h1>
-               @else
-                   <h1>
-                       Заказчик
-                   </h1>
-               @endif
-
-
-
-               @if(!is_null($user->image))
-                   <div class="col-6">
-                       <img class="w-100" src="/storage/{{ $user->image }}" alt="">
-                   </div>
-               @else
-                  <div class="col-6">
-                      <img class="w-100" src="/assets/static/images/noImage.jpg" alt="">
-                  </div>
-                   <form action="{{ route('user.index.upload.image') }}" method="POST" enctype="multipart/form-data">
-                       @csrf
-                       <input type="file" name="image">
-                       <button class="btn btn-info w-100">Upload</button>
-                   </form>
-               @endif
-
-
-               <form action="" class="d-flex flex-column mt-3">
-
-                   <label for="" class="d-flex align-items-center justify-content-between">
-                       <span>Name</span>
-                       <input type="text" value="{{ $user->name }}">
-                   </label>
-
-
-                   <label for="" class="d-flex align-items-center justify-content-between">
-                       <span>Email</span>
-                       <input type="text" value="{{ $user->email }}">
-                   </label>
-
-               </form>
-           </div>
-
-            @includeWhen(count($categories), 'groups.user.pages.index.include.category')
-
-
+                <h3>{{ $user->name }}</h3>
+                <small>@if($user->freelancer) Фрилансер @else Заказчик @endif</small>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- Detail -->
+        <div class="r-detail">
+            <table>
+                <tr>
+                    <th>D.O.B</th>
+                    <td>08 Sep 1985</td>
+                </tr>
+                <tr>
+                    <th>Age</th>
+                    <td>28 Yrs</td>
+                </tr>
+                <tr>
+                    <th>Qualification</th>
+                    <td>M.E., P.hD</td>
+                </tr>
+                <tr>
+                    <th>Blood Group</th>
+                    <td>A Positive</td>
+                </tr>
+                <tr>
+                    <th>Mobile</th>
+                    <td>+ 832 933 9498</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ $user->email }}</td>
+                </tr>
+                <tr>
+                    <th>Location</th>
+                    <td>Bangalore, India</td>
+                </tr>
+            </table>
+        </div>
+        <!-- Social -->
+        <div class="social">
+            <a href="ui-304.html#" class="facebook"><i class="fa fa-facebook"></i></a>
+            <a href="ui-304.html#" class="twitter"><i class="fa fa-twitter"></i></a>
+            <a href="ui-304.html#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+            <a href="ui-304.html#" class="linkedin"><i class="fa fa-linkedin"></i></a>
         </div>
 
-        <div class="col-6 pr-0">
-            <h2>
-                Сменить пароль
-            </h2>
+        <a class="btn btn-green" href="{{ route('user.settings.index') }}">
+            Settings
+        </a>
+    </div>
+    <!-- Main -->
+    <div class="main-block bg-orange">
+        <div class="objective">
+            <h3>Welcome</h3>
+            <div class="objective-content">
+                <p>Hi!, I'm Ashok from Madurai, India. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt nui dolorem ipsum quia dolor sit amet consectetur.</p>
+            </div>
+        </div>
+        <hr>
 
+        @includeWhen(count($categories), 'groups.user.pages.index.include.category')
 
-            <form method="POST" action="{{ route('user.index.update.password') }}" class="d-flex flex-column">
-                @csrf
-                <label for="" class="d-flex align-items-center justify-content-between">
-                    <span class="mr-4">Старый пароль</span>
-                    <input type="text" name="oldPassword">
-                </label>
-
-
-                <label for="" class="d-flex align-items-center justify-content-between">
-                    <span class="mr-4">Новый пароль</span>
-                    <input type="text" name="password">
-                </label>
-
-                <label for="" class="d-flex align-items-center justify-content-between">
-                    <span class="mr-4">Повторите <br/> новый пароль</span>
-                    <input type="text" name="password_confirmation">
-                </label>
-
-                <button class="btn btn-success" type="submit">Обновить</button>
-
-            </form>
-
-            @includeWhen(count($user->portfolio), 'groups.user.pages.index.include.portfolio')
-
+        <hr>
+        <!-- Education -->
+        <div class="education">
+            <h3>Education</h3>
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <!-- Education Item -->
+                    <div class="education-item">
+                        <h6>[ 2002 - 2006 ]</h6>
+                        <h4>Bachelor of Engineering</h4>
+                        <p>Lorem ipsum dolor sit ametconsectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <!-- Education Item -->
+                    <div class="education-item">
+                        <h6>[ 2006 - 2008 ]</h6>
+                        <h4>Master of Engineering</h4>
+                        <p>Lorem ipsum dolor sit ametconsectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <!-- Education Item -->
+                    <div class="education-item">
+                        <h6>[ 2008 - 2010 ]</h6>
+                        <h4>Doctorate in Engineering</h4>
+                        <p>Lorem ipsum dolor sit ametconsectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <hr>
+        <!-- Experience -->
+        <div class="experience">
+            <h3>Experience</h3>
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <!-- Experience Item -->
+                    <div class="experience-item">
+                        <!-- Experience Detail -->
+                        <div class="experience-detail">
+                            <h6>[ Sep 2013 To Present ]</h6>
+                            <h4>Sr. Web Designer at AshoApps</h4>
+                        </div>
+                        <p> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="experience-item">
+                        <!-- Experience Detail -->
+                        <div class="experience-detail">
+                            <h6>[ Aug 2012 To Sep 2013 ]</h6>
+                            <h4>Web Designer at TechnoForm</h4>
+                        </div>
+                        <p> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="experience-item">
+                        <!-- Experience Detail -->
+                        <div class="experience-detail">
+                            <h6>[ Oct 2011 To Aug 2012 ]</h6>
+                            <h4>Web Developer at RokSolution</h4>
+                        </div>
+                        <p> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
+        <hr />
 
     </div>
+    <!-- Clearfix -->
+    <div class="clearfix"></div>
+</div>
+<!-- Resume Ends -->
+
+
 
 @endsection
 
 @section('footer')
-{{--    <script>--}}
-{{--       setTimeout(() => {--}}
-{{--           const wrapper = document.querySelector('#category');--}}
-{{--           const btn = wrapper.querySelector('#buttonCategory');--}}
-{{--           const form = wrapper.querySelector('#formCategory');--}}
 
-{{--           btn.addEventListener('click', () =>--}}
-{{--           {--}}
-{{--               form.classList.remove('d-none')--}}
-{{--           })--}}
-{{--       }, 100)--}}
-{{--    </script>--}}
 @endsection
