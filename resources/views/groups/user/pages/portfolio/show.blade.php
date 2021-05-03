@@ -55,7 +55,7 @@
 
 @section('content')
 
-    <div class="col-9 d-flex justify-content-between">
+    <div class="w-100 d-flex justify-content-between">
 
 
         <div class="col-8 d-flex">

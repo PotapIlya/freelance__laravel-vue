@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('auth.app')
 
 @section('content')
 <div class="container">
@@ -68,6 +68,9 @@
                 </div>
             </div>
         </div>
+        <a href="https://selection-studio.com/files/downloads/Razrabotka/mega-elements-bootstrap/ui/ui-175.html">
+            https://selection-studio.com/files/downloads/Razrabotka/mega-elements-bootstrap/ui/ui-175.html
+        </a>
     </div>
 </div>
 @endsection

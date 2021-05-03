@@ -3,12 +3,11 @@
     max-width: 1200px;
   }
 }
-
+.alert{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
 @import "static/font-awesome.min";
-
-
-@import "theme/aside";
-@import "theme/style-304";
-@import "theme/settings";
-@import "theme/settingsCategory";
+@import "theme/app";

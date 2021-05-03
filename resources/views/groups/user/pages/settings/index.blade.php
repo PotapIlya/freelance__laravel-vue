@@ -14,7 +14,7 @@
                     <div class="ui-nav-one">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
-                            <li><a href="#" class="nav-tabs-href"  data-toggle="tab"><i class="fa fa-comments"></i><1span>Основные</1span></a></li>
+                            <li><a href="#" class="nav-tabs-href"  data-toggle="tab"><i class="fa fa-comments"></i><span>Основные</span></a></li>
                             <li><a href="#" class="nav-tabs-href" data-toggle="tab"><i class="fa fa-asterisk"></i><span>Категории</span></a></li>
                             <li><a href="#" class="nav-tabs-href" data-toggle="tab"><i class="fa fa-building"></i><span>Building</span></a></li>
                         </ul>
@@ -126,9 +126,9 @@
             const buttons = document.querySelectorAll('.nav-tabs-href');
             const contents = document.querySelectorAll('.tab-content-item');
 
-            buttons[1].parentElement.classList.add('active')
-            contents[1].classList.add('active')
-            contents[1].classList.remove('fade')
+            buttons[0].parentElement.classList.add('active')
+            contents[0].classList.add('active')
+            contents[0].classList.remove('fade')
 
             buttons.forEach( (btn, index) => {
                 btn.addEventListener('click', (e) => {

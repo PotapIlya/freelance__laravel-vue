@@ -19,7 +19,9 @@ class CreateUsersTable extends Migration
 
             $table->string('freelancer')->default(1);
 
-            $table->string('name');
+            $table->string('first_name')->default(null)->nullable();
+            $table->string('last_name')->default(null)->nullable();
+
             $table->string('email')->unique();
             $table->string('image', 255)->unique()->default(null)->nullable();
             $table->timestamp('email_verified_at')->nullable();

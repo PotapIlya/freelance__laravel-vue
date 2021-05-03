@@ -31,6 +31,7 @@
                 </div>
             </section>
         </main>
+        @include('groups.include.alert.message')
         <footer> </footer>
 
 {{--    <script src="{{ asset('/assets/js/app.js') }}" defer></script>--}}
@@ -38,8 +39,19 @@
 
 
     <script>
-        // on-off aside
+        // off alert
 
+        if ( document.querySelector('.alert') )
+        {
+            const alert = document.querySelector('.alert');
+
+            setTimeout(() => {
+                alert.classList.add('d-none')
+            }, 5000)
+        }
+
+
+        // on-off aside
         setTimeout(() => {
             if (document.querySelector('.aside'))
             {

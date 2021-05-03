@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\BaseUserController;
 use App\Models\Admin\Project\Category;
 use App\Models\Admin\Users\User;
+use App\Services\User\Settings\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +23,7 @@ class SettingsController extends BaseUserController
      */
     public function index()
     {
+
         return view('groups.user.pages.settings.index', [
             'categories' => Category::getAll(),
             'user' => User::with('categories')->findOrFail(Auth::id())
@@ -71,16 +73,21 @@ class SettingsController extends BaseUserController
         //
     }
 
+
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @param Settings $settings
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id, Settings $settings)
     {
-        //
+        if ( $settings->update($request->all()) )
+        {
+            return redirect()->back()->with(['success' => 'success']);
+        } else{
+            abort(500);
+        }
     }
 
     /**

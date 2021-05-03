@@ -4,9 +4,10 @@ namespace App\Http\Controllers\User\Portfolio;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\BaseUserController;
+use App\Http\Requests\User\Portfolio\AddRequest;
 use App\Models\Admin\Users\User;
 use App\Models\User\Portfolio\UserPortfolio;
-use App\Services\User\Portfolio\Image;
+use App\Services\User\Portfolio\Portfolio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -30,27 +31,27 @@ class PortfolioController extends BaseUserController
         return view('groups.user.pages.portfolio.index', compact('user'));
     }
 
+
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        //
+        return view('groups.user.pages.portfolio.create');
     }
 
 
     /**
      * @param Request $request
-     * @param Image $image
+     * @param Portfolio $portfolio
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, Image $image)
+    public function store(AddRequest $request, Portfolio $portfolio)
     {
-        if ( $image->add($request->all()) )
+
+        if ( $portfolio->add($request->all()) )
         {
-            return redirect()->back();
+            return redirect()->back()->with(['success' => 'success']);
         } else{
             abort(500);
         }
@@ -68,40 +69,47 @@ class PortfolioController extends BaseUserController
         return view('groups.user.pages.portfolio.show', compact('item', 'id'));
     }
 
+
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
-        //
+        return view('groups.user.pages.portfolio.edit', [
+            'item' => UserPortfolio::findOrFail($id),
+            'id' => $id
+        ]);
     }
 
+
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @param Portfolio $portfolio
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id, Portfolio $portfolio)
     {
-        //
+        if ( $portfolio->update($request->all(), $id) )
+        {
+            return redirect()->back()->with(['success' => 'success']);
+        } else{
+            abort(500);
+        }
     }
 
 
     /**
      * @param int $id
-     * @param Image $image
+     * @param Portfolio $portfolio
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(int $id, Image $image)
+    public function destroy(int $id, Portfolio $portfolio)
     {
-        if ( $image->delete($id) )
+        if ( $portfolio->delete($id) )
         {
-            return redirect()->back();
+            return redirect()->back()->with(['success' => 'success']);
         } else{
             abort(500);
         }

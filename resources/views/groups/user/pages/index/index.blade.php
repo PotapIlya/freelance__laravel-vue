@@ -10,7 +10,11 @@
         <div class="r-sidebar-item">
             <!-- Sidebar Image -->
             <div class="img">
-               <img src="/assets/user/static/images/noImage.jpg" alt="" class="img-responsive w-100" />
+                @if(is_null($user->image))
+                    <img src="/assets/user/static/images/noImage.jpg" alt="" class="img-responsive w-100" />
+                @else
+                    <img src="/storage/{{ $user->image }}" alt="" class="img-responsive w-100" />
+                @endif
             </div>
             <!-- Name -->
             <div class="name">

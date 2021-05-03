@@ -1,0 +1,53 @@
+
+/* UI X */
+.ui-25{
+	max-width:1000px;
+	margin:40px auto;
+}
+.ui-25 .ui-item{
+	max-width:200px;
+	margin:15px auto;
+	border:2px solid #ddd;
+	text-align:center;
+	border-radius:4px;
+	padding:25px 5px;
+	cursor:pointer;
+}
+.ui-25 .ui-item.active{
+	background:#f7feff;
+	border:2px solid #96d0d9;
+}
+.ui-25 h3{
+	font-size:15px;
+	line-height:15px;
+	text-transform:uppercase;
+	color:#777;
+}
+.ui-25 .ui-icons{
+	display:none;
+	max-width:200px;
+	margin:0px auto;
+	position:relative;
+}
+.ui-25 .ui-icons.visible{
+	display:block;
+}
+.ui-25 .ui-icons a{
+	color:#fff;
+	width:25px;
+	height:25px;
+	line-height:25px;
+	text-align:center;
+	border-radius:100%;
+	display:inline-block;
+}
+.ui-25 .ui-icons .check{
+	position:absolute;
+	bottom:10px;
+	left:-15px;
+}
+.ui-25 .ui-icons .cross{
+	position:absolute;
+	bottom:10px;
+	right:-15px;
+}

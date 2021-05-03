@@ -3,46 +3,49 @@
 
 @section('content')
 
-    <div>
-        <h2>
-            Портфолио
-        </h2>
+    <div class="ui-208 w-100">
 
-        <form method="POST" action="{{ route('user.portfolio.store') }}" enctype="multipart/form-data">
-            @csrf
-            <input name="image" type="file">
-            <button type="submit">Send</button>
-            
-        </form>
+        <div class="d-flex align-items-center justify-content-between">
+            <h2>
+                Портфолио
+            </h2>
+            <a href="{{ route('user.portfolio.create') }}" class="btn btn-info">
+                Добавить работу
+            </a>
+        </div>
 
-        @if(count($user->portfolio))
-            <div>
 
-                <h3>
-                    Мои работы
-                </h3>
+            @if(count($user->portfolio))
+            <div class="row">
 
-                <div class="row justify-content-start">
-                    @foreach($user->portfolio as $portfolio)
+                @foreach($user->portfolio as $portfolio)
+                <div class="col-md-4 col-sm-6">
+                    <div class="ui-item">
+                        <a href="{{ route('user.portfolio.show', $portfolio->id) }}">
+                            <img src="/storage/{{ $portfolio->path }}" alt="" class="img-responsive w-100" />
+                        </a>
 
-                        <div class="col-4 d-flex flex-column mb-4">
-                            <a href="{{ route('user.portfolio.show', $portfolio->id) }}">
-                                <img class="w-100" src="/storage/{{ $portfolio->path }}" alt="">
-                            </a>
-                            <form action="{{ route('user.portfolio.destroy', $portfolio->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="w-100 btn btn-danger">Delete</button>
-                            </form>
+                        <div class="content">
+                            <h3><a href="{{ route('user.portfolio.show', $portfolio->id) }}">Lorem ipsum dolor amet</a></h3>
+                            <p>Quisque nisl leo, blandit in magna vel, pulvinar vehicula augue. Phasellus nulla enim, sodales eget eleifend ut, rutrum et velit.</p>
+
+                            <div class="d-flex align-items-center justify-content-between">
+                                <a href="{{ route('user.portfolio.edit', $portfolio->id) }}" class="btn btn-red">Редактировать</a>
+
+                                <form action="{{ route('user.portfolio.destroy', $portfolio->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-red">Удалить</button>
+                                </form>
+                            </div>
                         </div>
-
-
-                    @endforeach
+                    </div>
                 </div>
+                @endforeach
 
             </div>
-        @endif
-        
+            @endif
+
     </div>
 
 @endsection

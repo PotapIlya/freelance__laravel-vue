@@ -17,7 +17,9 @@ class CreateUserPortfoliosTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('user_id');
+            $table->string('title', 255);
             $table->string('path', 255)->unique();
+            $table->text('text')->nullable();
 
             $table->timestamps();
 
