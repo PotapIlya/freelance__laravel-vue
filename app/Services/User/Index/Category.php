@@ -8,11 +8,11 @@ class Category
 {
 
     /**
-     * @param int $id
-     * @return mixed
+     * @param array $array
      */
     public function add(array $array)
     {
+
 //        dd(
 ////
 //

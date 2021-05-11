@@ -83,6 +83,16 @@
             const elements = document.querySelectorAll('.ui-item-element');
             const params = [];
 
+            const deleteParams = [];
+
+            const x = {
+
+                add : [],
+                delete : [],
+
+            }
+
+
             const saveBtn = document.querySelector('#saveBtn');
             const saveInput = document.querySelector('#saveInput');
             const saveForm = document.querySelector('#saveForm');
@@ -91,28 +101,33 @@
                 {
                     saveInput.value = JSON.stringify(params);
                     saveForm.submit();
-                } else{
+                } else {
                     alert('Вы ничего не выбрали')
                 }
             })
 
             elements.forEach(el => {
+                const item = el.querySelector('.ui-item');
+                const icon = el.querySelector('.ui-icons');
+                const id = Number(el.dataset.id);
+
+                if (item.classList.contains('active'))
+                {
+                    params.push(id);
+                }
+
                 el.addEventListener('click', () => {
-                    const item = el.querySelector('.ui-item');
-                    const icon = el.querySelector('.ui-icons');
-                    const id = Number(el.dataset.id);
 
                     if (item.classList.contains('active'))
                     {
                         item.classList.remove('active');
                         icon.classList.remove('visible');
                         params.splice(params.indexOf(id), 1);
-                    }  else{
+                    }  else {
                         item.classList.add('active');
                         icon.classList.add('visible');
                         params.push(id);
                     }
-
 
                 })
             })
@@ -126,9 +141,9 @@
             const buttons = document.querySelectorAll('.nav-tabs-href');
             const contents = document.querySelectorAll('.tab-content-item');
 
-            buttons[0].parentElement.classList.add('active')
-            contents[0].classList.add('active')
-            contents[0].classList.remove('fade')
+            buttons[1].parentElement.classList.add('active')
+            contents[1].classList.add('active')
+            contents[1].classList.remove('fade')
 
             buttons.forEach( (btn, index) => {
                 btn.addEventListener('click', (e) => {
