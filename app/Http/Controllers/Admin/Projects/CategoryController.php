@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Projects;
 
 use App\Http\Controllers\Admin\BaseAdminController;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Project\Category;
+use App\Models\Project\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends BaseAdminController

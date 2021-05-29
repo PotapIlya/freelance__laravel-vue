@@ -18,7 +18,7 @@
             <button class="btn btn-success" id="showBtn">Оставить отклик</button>
 
             <div id="showForm" class="d-none mt-3">
-                <form method="POST" action="{{ '/my/project/create/' . $project->id }}">
+                <form method="POST" action="{{ route('user.projects.response', $project->id) }}">
                     @csrf
 
                     <div class="form-group">
@@ -44,8 +44,9 @@
                 @foreach($project->responses as $response)
                     <tr>
                         <td>
-                            <a href="{{ route('user.index.show', $response->user->name) }}">
-                                {{ $response->user->name }}
+
+                            <a href="{{ route('user.index.show', $response->user->first_name) }}">
+                                {{ $response->user->first_name }}
                             </a>
                         </td>
                         <td>{{ $response->text }}</td>

@@ -6,6 +6,7 @@
     <div class="row align-items-center">
 
         @foreach($user->portfolio as $portfolio)
+
             <a href="{{ route('user.portfolio.show', $portfolio->id) }}"
                class="col-4 mb-3">
                 <div class="d-flex">

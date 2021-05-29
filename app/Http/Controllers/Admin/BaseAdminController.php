@@ -12,7 +12,7 @@ class BaseAdminController extends Controller
 //		parent::__construct();
 
 		$this->middleware('auth');
-		$this->middleware('admin');
+//		$this->middleware('admin');
 
 	}
 }

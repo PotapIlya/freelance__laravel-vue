@@ -5,8 +5,8 @@ namespace App\Http\Controllers\User\Portfolio;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\BaseUserController;
 use App\Http\Requests\User\Portfolio\AddRequest;
-use App\Models\Admin\Users\User;
-use App\Models\User\Portfolio\UserPortfolio;
+use App\Models\Users\User;
+use App\Models\Portfolio\UserPortfolio;
 use App\Services\User\Portfolio\Portfolio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,7 +51,7 @@ class PortfolioController extends BaseUserController
 
         if ( $portfolio->add($request->all()) )
         {
-            return redirect()->back()->with(['success' => 'success']);
+            return redirect()->route('user.portfolio.index')->with(['success' => 'success']);
         } else{
             abort(500);
         }

@@ -76,9 +76,15 @@ Route::group(
             Route::post('/portfolio/comment/store/{portfolio_id}', 'CommentsController@store')->name('user.portfolio.comments.store');
         });
 
+        Route::group([
+            'namespace' => 'Project'
+        ], function ()
+        {
+            Route::resource('/projects', 'ProjectsController')->names('user.projects');
+            Route::post('/projects/response/{id}', 'ResponseController@storeResponse')->name('user.projects.response');
+        });
 
 
-        Route::resource('/projects', 'ProjectsController')->names('user.projects');
 
 
 
@@ -96,13 +102,13 @@ Route::group(
         /*
          *  CHAT
          */
-//        Route::group([
-//            'namespace' => 'Chat',
-//            'prefix' => 'chat'
-//        ], function ()
-//        {
-//            Route::resource('/', 'IndexController')->names('user.chat');
-//        });
+        Route::group([
+            'namespace' => 'Chat',
+            'prefix' => 'chat'
+        ], function ()
+        {
+            Route::resource('/', 'IndexController')->names('user.chat');
+        });
     }
 );
 

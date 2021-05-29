@@ -4,7 +4,7 @@
 namespace App\Services\User\Portfolio;
 
 
-use App\Models\User\Portfolio\UserPortfolio;
+use App\Models\Portfolio\UserPortfolio;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 

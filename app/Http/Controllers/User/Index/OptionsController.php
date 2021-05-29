@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User\Index;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\BaseUserController;
-use App\Models\Admin\Users\User;
+use App\Models\Users\User;
 use App\Services\User\Index\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

@@ -1,33 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\User\Settings;
+namespace App\Http\Controllers\User\Project;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\BaseUserController;
-use App\Models\Project\Category;
-use App\Models\Users\User;
-use App\Services\User\Settings\Settings;
+use App\Models\Projects\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SettingsController extends BaseUserController
+class ResponseController extends BaseUserController
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-
-        return view('groups.user.pages.settings.index', [
-            'categories' => Category::getAll(),
-            'user' => User::with('categories')->findOrFail(Auth::id())
-        ]);
+        //
     }
 
     /**
@@ -38,6 +28,25 @@ class SettingsController extends BaseUserController
     public function create()
     {
         //
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeResponse(Request $request, int $id)
+    {
+        $create = Response::create([
+            'user_id' => Auth::id(),
+            'project_id' => $id,
+            'text' => $request->text,
+        ]);
+        if ($create){
+            return redirect()->back();
+        } else{
+            abort(500);
+        }
     }
 
     /**
@@ -73,21 +82,16 @@ class SettingsController extends BaseUserController
         //
     }
 
-
     /**
-     * @param Request $request
-     * @param int $id
-     * @param Settings $settings
-     * @return \Illuminate\Http\RedirectResponse
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $id, Settings $settings)
+    public function update(Request $request, $id)
     {
-        if ( $settings->update($request->all()) )
-        {
-            return redirect()->back()->with(['success' => 'success']);
-        } else{
-            abort(500);
-        }
+        //
     }
 
     /**

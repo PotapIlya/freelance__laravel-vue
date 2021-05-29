@@ -1,17 +1,18 @@
 <template>
-  <div className="d-flex flex-column">
+  <div class="d-flex flex-column">
+      <h2>Chat</h2>
 
     <form @submit.prevent="save" class="d-flex align-items-center">
-      <input v-model="input" className="w-75">
-      <button type="submit" className="w-25 btn btn-success">Save</button>
+      <input v-model="input" class="w-75">
+      <button type="submit" class="w-25 btn btn-success">Save</button>
     </form>
 
     <ul
         v-if="arrayMessage.length"
-        className="my-3 list-inline">
+        class="my-3 list-inline">
 
       <li v-for="item in arrayMessage">
-        <span className="d-block h4">{{ item.message }}</span>
+        <span class="d-block h4">{{ item.message }}</span>
         <hr>
       </li>
 
@@ -30,11 +31,12 @@ export default {
     url: '/message',
   }),
   mounted() {
+      console.log('Chat init')
 
-
-    window.Echo.channel('presence-room.'+1)
+    window.Echo.channel('chat')
         .listen('NewMessage', ({message}) => {
           console.log(message)
+            console.log(12)
           this.arrayMessage.push({message: message});
         })
 

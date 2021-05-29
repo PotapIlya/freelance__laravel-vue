@@ -34,9 +34,8 @@
         @include('groups.include.alert.message')
         <footer> </footer>
 
-{{--    <script src="{{ asset('/assets/js/app.js') }}" defer></script>--}}
+    <script src="{{ asset('/assets/js/app.js') }}" defer></script>
     @yield('footer')
-
 
     <script>
         // off alert

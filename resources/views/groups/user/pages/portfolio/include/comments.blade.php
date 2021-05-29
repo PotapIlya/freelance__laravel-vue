@@ -3,7 +3,7 @@
     @foreach($item->comments as $comment)
         <li class="media">
             <div class="media-left col-4">
-                <a href="{{ route('user.index.show', $comment->user->name) }}"
+                <a href="{{ route('user.index.show', $comment->user->first_name) }}"
                    class="d-block pr-2">
 
                     @if(!is_null($comment->user->image))
@@ -18,7 +18,7 @@
                 </a>
             </div>
             <div class="media-body">
-                <a href="{{ route('user.index.show', $comment->user->name) }}" class="media-heading">
+                <a href="{{ route('user.index.show', $comment->user->first_name) }}" class="media-heading">
                     <div class="author">{{ $comment->user->name }}</div>
                     <div class="metadata">
                     <span class="date">

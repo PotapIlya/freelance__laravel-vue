@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User\Portfolio;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\BaseUserController;
-use App\Models\User\Portfolio\UserComments;
+use App\Models\Portfolio\UserComments;
 use App\Services\User\Portfolio\Comments;
 use Illuminate\Http\Request;
 

@@ -4,7 +4,7 @@
 namespace App\Services\User\Index;
 
 
-use App\Models\Admin\Users\User;
+use App\Models\Users\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;

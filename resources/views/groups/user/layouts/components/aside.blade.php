@@ -9,7 +9,7 @@
 {{--</aside>--}}
 
 
-<div id="aside" class="col-1 ui-323 aside active clearfix">
+<div id="aside" class="col-1 ui-323 mr-4 aside active clearfix">
     <!-- Nav tabs -->
 {{--    <ul class="ui-nav bg-lblue">--}}
     <ul class="ui-nav bg-orange">

@@ -4,7 +4,7 @@
 namespace App\Services\User\Portfolio;
 
 
-use App\Models\User\Portfolio\UserComments;
+use App\Models\Portfolio\UserComments;
 use Illuminate\Support\Facades\Auth;
 
 class Comments

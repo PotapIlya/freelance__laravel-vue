@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Models\User\Portfolio;
+namespace App\Models\Projects;
 
-use App\Models\Admin\Users\User;
+use App\Models\Users\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserComments extends Model
+class Response extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
 
+    protected $guarded = ['id'];
 
     public function user()
     {

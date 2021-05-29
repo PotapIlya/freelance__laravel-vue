@@ -4,10 +4,10 @@ namespace App\Http\Controllers\User\Index;
 
 use App\Http\Controllers\User\BaseUserController;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Project\Category;
+use App\Models\Project\Category;
 use Faker\Provider\Base;
 use Illuminate\Http\Request;
-use App\Models\Admin\Users\User;
+use App\Models\Users\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -70,7 +70,7 @@ class IndexController extends BaseUserController
     public function show(string $name)
     {
         $user = User::with('categories', 'portfolio')
-            ->where('name', $name)
+            ->where('first_name', $name)
             ->first();
         if ( !$user ){
             abort(404);

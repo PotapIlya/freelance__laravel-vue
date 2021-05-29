@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Projects;
 
 use App\Http\Controllers\Admin\BaseAdminController;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Projects\Project;
+use App\Models\Projects\Project;
 use Illuminate\Http\Request;
 
 class ProjectController extends BaseAdminController

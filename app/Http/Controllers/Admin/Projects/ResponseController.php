@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Projects;
 
 use App\Http\Controllers\Admin\BaseAdminController;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Projects\Response;
+use App\Models\Projects\Response;
 use Faker\Provider\Base;
 use Illuminate\Http\Request;
 

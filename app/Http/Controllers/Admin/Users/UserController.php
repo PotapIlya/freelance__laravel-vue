@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Admin\BaseAdminController;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Users\Role;
-use App\Models\Admin\Users\User;
+use App\Models\Users\Role;
+use App\Models\Users\User;
 use Illuminate\Http\Request;
 
 class UserController extends BaseAdminController

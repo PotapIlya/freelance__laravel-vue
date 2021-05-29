@@ -31,3 +31,4 @@ Vue.component('chat-component', require('./components/ChatComponent').default);
 const app = new Vue({
     el: '#app',
 });
+

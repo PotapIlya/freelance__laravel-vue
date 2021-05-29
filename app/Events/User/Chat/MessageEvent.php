@@ -30,12 +30,14 @@ class MessageEvent implements ShouldBroadcast
         $this->message = $data;
     }
 
+
     /**
-     * @return PresenceChannel
+     * @return Channel|Channel[]
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('room.'.$this->message['id']);
+        return new Channel('chat');
+//        return new PresenceChannel('room.'.$this->message['id']);
     }
 
     /**

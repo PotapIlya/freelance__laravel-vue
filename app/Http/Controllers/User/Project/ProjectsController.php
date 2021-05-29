@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\User\Project;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Projects\Project;
+use App\Http\Controllers\User\BaseUserController;
+use App\Models\Projects\Project;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -24,6 +25,7 @@ class ProjectsController extends BaseUserController
     public function index()
     {
         $myProject = Project::where('user_id', Auth::id())->get();
+
 
         return view('groups.user.pages.projects.index',
             [

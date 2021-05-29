@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Admin\Users;
+namespace App\Models\Users;
 
-use App\Models\Admin\Project\Category;
-use App\Models\Admin\Users\Role;
-use App\Models\User\Portfolio\UserPortfolio;
+use App\Models\Project\Category;
+use App\Models\Users\Role;
+use App\Models\Portfolio\UserPortfolio;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;

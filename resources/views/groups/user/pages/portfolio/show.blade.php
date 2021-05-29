@@ -61,7 +61,7 @@
         <div class="col-8 d-flex">
 
             <img class="mw-100" src="/storage/{{ $item->path }}" alt="">
-            
+
         </div>
 
 
@@ -89,8 +89,8 @@
             </div>
 
         </div>
-        
-        
+
+
     </div>
 
 @endsection

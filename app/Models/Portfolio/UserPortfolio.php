@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models\User\Portfolio;
+namespace App\Models\Portfolio;
 
-use App\Models\Admin\Users\User;
+use App\Models\Users\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
